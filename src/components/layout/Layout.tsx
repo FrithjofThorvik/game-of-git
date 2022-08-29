@@ -1,7 +1,8 @@
-import Head from 'next/head';
 import type { FC } from 'react';
-import CharacterSidebar from './CharacterSidebar';
+import Head from 'next/head';
 import Sidebar from './Sidebar';
+import CharacterSidebar from './CharacterSidebar';
+import useProtectedRoutes from '@/hooks/useProtectedRoutes';
 
 interface LayoutProps {
   children: JSX.Element;
@@ -12,11 +13,13 @@ interface LayoutProps {
  * @return {JSX.Element} - The JSX code for Layout component
  */
 const Layout: FC<LayoutProps> = ({ children }): JSX.Element => {
+  useProtectedRoutes();
+
   return (
     <>
       <Head>
-        <title>Design</title>
-        <meta name="design" content="Design project" />
+        <title>Game of Git</title>
+        <meta name="GameOfGit" content="Game of Git" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="relative h-screen w-screen">
