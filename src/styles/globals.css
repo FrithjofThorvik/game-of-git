@@ -1,1 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+html {
+  @apply bg-dark-blue text-white;
+}
+
+@layer components {
+  /* Text */
+  .primary-heading {
+    @apply text-40 font-bold text-white;
+  }
+  .secondary-heading {
+    @apply text-32 font-bold text-white;
+  }
+  .tertiary-heading {
+    @apply text-24 font-bold text-white;
+  }
+  .quaternary-heading {
+    @apply text-18 font-semibold text-light-gray;
+  }
+  .content-text {
+    @apply text-16 font-normal text-light-gray;
+  }
+  .link-text {
+    @apply text-16 font-normal text-light-gray hover:text-light-blue hover:cursor-pointer;
+  }
+  .button-text {
+    @apply text-16 font-bold text-white hover:cursor-pointer;
+  }
+  .clickable-text {
+    @apply text-16 font-normal underline text-light-blue hover:text-hover-light-blue;
+  }
+  .small-text {
+    @apply text-12 font-bold text-white;
+  }
+  /* Boxes */
+  .box-blue {
+    @apply border-8 bg-blue border-line-blue;
+  }
+  .box-gray {
+    @apply border-8 bg-gray border-line-gray;
+  }
+  .box-green {
+    @apply border-8 bg-green border-line-green;
+  }
+  .box-red {
+    @apply border-8 bg-red border-line-red;
+  }
+  .box-purple {
+    @apply border-8 bg-purple border-line-purple;
+  }
+  .box-coral {
+    @apply border-8 bg-coral border-line-coral;
+  }
+  .box-white {
+    @apply border-8 bg-white border-line-gray text-dark-blue;
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: #94a3b8 !important;
+}
