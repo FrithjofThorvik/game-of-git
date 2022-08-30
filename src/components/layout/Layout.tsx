@@ -25,7 +25,7 @@ const Layout: FC<LayoutProps> = ({ children }): JSX.Element => {
       <main className="relative h-screen w-screen">
         <Sidebar />
         <CharacterSidebar />
-        <div className="absolute top-0 bottom-0 flex flex-col w-full overflow-y-auto pl-[16rem] pr-[22rem] py-10 bg-dark-blue">
+        <div className="absolute top-0 bottom-0 flex flex-col w-full overflow-y-auto overflow-x-hidden pl-[16rem] pr-[22rem] py-10 bg-dark-blue">
           {children}
         </div>
       </main>
