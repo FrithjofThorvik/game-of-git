@@ -30,9 +30,10 @@ model GitCard {
 model GitCardLevel {
   id String @id @default(uuid())
   gitCard GitCard @relation(fields: [gitCardId], references: [id])
-  command String
-  cost Int
+  level Int
   exp Int
+  cost Int
+  command String
   gitCardId String
 }
 
