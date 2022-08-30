@@ -37,25 +37,25 @@ html {
   }
   /* Boxes */
   .box-blue {
-    @apply border-8 bg-blue border-line-blue;
+    @apply rounded-lg border-2 bg-blue border-line-blue;
   }
   .box-gray {
-    @apply border-8 bg-gray border-line-gray;
+    @apply rounded-lg border-2 bg-gray border-line-gray;
   }
   .box-green {
-    @apply border-8 bg-green border-line-green;
+    @apply rounded-lg border-2 bg-green border-line-green;
   }
   .box-red {
-    @apply border-8 bg-red border-line-red;
+    @apply rounded-lg border-2 bg-red border-line-red;
   }
   .box-purple {
-    @apply border-8 bg-purple border-line-purple;
+    @apply rounded-lg border-2 bg-purple border-line-purple;
   }
   .box-coral {
-    @apply border-8 bg-coral border-line-coral;
+    @apply rounded-lg border-2 bg-coral border-line-coral;
   }
   .box-white {
-    @apply border-8 bg-white border-line-gray text-dark-blue;
+    @apply rounded-lg border-2 bg-white border-line-gray text-dark-blue;
   }
 }
 
