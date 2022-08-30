@@ -1,0 +1,160 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// User
+model User {
+  id                  String  @id @default(uuid())
+  email               String  @unique
+  name                String?
+  exp                 Int     @default(0)
+  jobPosition         JobPositionForUser?
+  gitCards            GitCardForUser[]
+  completedStages     StageCompletedByUser[]
+  completedExercises  ExerciseCompletedByUser[]
+}
+
+// Git Cards
+model GitCard {
+  id String @id @default(uuid())
+  name String
+  levels GitCardLevel[]
+  gitCardForUsers GitCardForUser[]
+}
+
+model GitCardLevel {
+  id String @id @default(uuid())
+  gitCard GitCard @relation(fields: [gitCardId], references: [id])
+  command String
+  cost Int
+  exp Int
+  gitCardId String
+}
+
+model GitCardForUser {
+  id String @id @default(uuid())
+  user User @relation(fields: [userId], references: [id])
+  gitCard GitCard @relation(fields: [gitCardId], references: [id])
+  userId String
+  gitCardId String
+}
+
+// Jobs
+model Job {
+  id            String @id @default(uuid())
+  name          String
+  jobPositions  JobPosition[]
+}
+
+model JobPosition {
+  id                  String @id @default(uuid())
+  job                 Job @relation(fields: [jobId], references: [id])
+  name                String
+  exp                 Int
+  salary              Int
+  jobId               String
+  positionType        PositionType
+  developerType       DeveloperType
+  jobPositionForUsers JobPositionForUser[]
+}
+
+model JobPositionForUser {
+  id              String      @id @default(uuid())
+  user            User        @relation(fields: [userId], references: [id])
+  jobPosition     JobPosition @relation(fields: [jobPositionId], references: [id])
+  userId          String      @unique
+  jobPositionId   String
+}
+
+enum PositionType {
+  INTERN    @map("intern")
+  FULL_TIME @map("full_time")
+  CTO       @map("cto")
+  CEO       @map("ceo")
+}
+
+enum DeveloperType {
+  FRONTEND_DEVELOPER        @map("frontend_developer")
+  BACKEND_DEVELOPER         @map("backend_developer")
+  FULL_STACK_DEVELOPER      @map("full_stack_developer")
+  MOBILE_DEVELOPER          @map("mobile_developer")
+  GAME_DEVELOPER            @map("game_developer")
+  DATA_SCIENTIST_DEVELOPER  @map("data_scientist_developer")
+  DEV_OPS_DEVELOPER         @map("dev_ops_developer")
+  SOFTWARE_DEVELOPER        @map("software_developer")
+  WEB_DEVELOPER             @map("web_developer")
+  SECURITY_DEVELOPER        @map("security_developer")
+}
+
+// Stages
+model Stage {
+  id                String @id @default(uuid())
+  name              String
+  description       String
+  exercises         Exercise[]
+  completedByUsers  StageCompletedByUser[]
+}
+
+model Exercise {
+  id                String      @id @default(uuid())
+  stage             Stage       @relation(fields: [stageId], references: [id])
+  name              String
+  stageId           String
+  tutorials         Tutorial[]
+  questions         Question[]
+  completedByUsers  ExerciseCompletedByUser[]
+}
+
+model Tutorial {
+  id          String @id @default(uuid())
+  exercise    Exercise @relation(fields: [exerciseId], references: [id])
+  title       String
+  description String
+  image       String?
+  code        String?
+  exerciseId  String
+}
+
+model Question {
+  id            String   @id @default(uuid())
+  exercise      Exercise @relation(fields: [exerciseId], references: [id])
+  text          String
+  exerciseId    String
+  solutions     Solution[]
+  alternatives  Alternative[]
+}
+
+model Alternative {
+  id          String   @id @default(uuid())
+  question    Question @relation(fields: [questionId], references: [id])
+  value       String
+  questionId  String
+}
+
+model Solution {
+  id          String   @id @default(uuid())
+  question    Question @relation(fields: [questionId], references: [id])
+  value       String
+  questionId  String
+}
+
+model ExerciseCompletedByUser {
+  id          String    @id @default(uuid())
+  exercise    Exercise  @relation(fields: [exerciseId], references: [id])
+  user        User      @relation(fields: [userId], references: [id])
+  exerciseId  String 
+  userId      String 
+}
+
+model StageCompletedByUser {
+  id      String  @id @default(uuid())
+  stage   Stage   @relation(fields: [stageId], references: [id])
+  user    User    @relation(fields: [userId], references: [id])
+  stageId String
+  userId  String
+}
