@@ -17,6 +17,7 @@ model User {
   gitCards            GitCardForUser[]
   completedStages     StageCompletedByUser[]
   completedExercises  ExerciseCompletedByUser[]
+  completedTutorials  TutorialCompletedByUser[]
 }
 
 // Git Cards
@@ -112,13 +113,14 @@ model Exercise {
 }
 
 model Tutorial {
-  id          String @id @default(uuid())
-  exercise    Exercise @relation(fields: [exerciseId], references: [id])
-  title       String
-  description String
-  image       String?
-  code        String?
-  exerciseId  String
+  id                String @id @default(uuid())
+  exercise          Exercise @relation(fields: [exerciseId], references: [id])
+  title             String
+  description       String
+  image             String?
+  code              String?
+  exerciseId        String
+  completedByUsers  TutorialCompletedByUser[]
 }
 
 model Question {
@@ -149,6 +151,14 @@ model ExerciseCompletedByUser {
   exercise    Exercise  @relation(fields: [exerciseId], references: [id])
   user        User      @relation(fields: [userId], references: [id])
   exerciseId  String 
+  userId      String 
+}
+
+model TutorialCompletedByUser {
+  id          String    @id @default(uuid())
+  tutorial    Tutorial  @relation(fields: [tutorialId], references: [id])
+  user        User      @relation(fields: [userId], references: [id])
+  tutorialId  String 
   userId      String 
 }
 
